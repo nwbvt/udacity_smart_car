@@ -16,6 +16,7 @@ class LearningAgent(Agent):
         self.alpha = 0.95
         self.gamma = 0.05
         self.explore = 0.05
+        self.last_state = None
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
@@ -26,6 +27,7 @@ class LearningAgent(Agent):
         deadline = self.env.get_deadline(self)
 
         state = self.observe_state()
+        self.last_state = state
         
         knowledge = self.knowledge_from_state(state)
 
@@ -75,7 +77,7 @@ def run():
     # NOTE: You can set enforce_deadline=False while debugging to allow longer trials
 
     # Now simulate it
-    sim = Simulator(e, update_delay=0, display=False)  # create simulator (uses pygame when display=True, if available)
+    sim = Simulator(e, update_delay=0.1, display=True)  # create simulator (uses pygame when display=True, if available)
     # NOTE: To speed up simulation, reduce update_delay and/or set display=False
 
     sim.run(n_trials=100)  # run for a specified number of trials
