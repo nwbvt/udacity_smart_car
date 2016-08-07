@@ -16,7 +16,7 @@ class LearningAgent(Agent):
         self.alpha = 0.95
         self.gamma = 0.05
         self.explore = 0.05
-        self.last_state = None
+        self.state = None
 
     def reset(self, destination=None):
         self.planner.route_to(destination)
@@ -27,7 +27,7 @@ class LearningAgent(Agent):
         deadline = self.env.get_deadline(self)
 
         state = self.observe_state()
-        self.last_state = state
+        self.state = state
         
         knowledge = self.knowledge_from_state(state)
 
